@@ -3,6 +3,7 @@
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
 Admin.find_or_create_by!(username: "admin") do |admin|
+	admin.username = "admin"
 	admin.password = "Password123!"
 	admin.password_confirmation = "Password123!"
 	admin.name = "Primary Admin"
