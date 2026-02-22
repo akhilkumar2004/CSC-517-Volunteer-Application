@@ -1481,3 +1481,28 @@ Processing by Admin::VolunteerAssignmentsController#index as HTML
 Completed 200 OK in 41ms (Views: 5.8ms | ActiveRecord: 2.2ms (5 queries, 0 cached) | GC: 0.6ms)
 
 
+Writing application-aed80f6d.css
+Writing application-bfcdf840.js
+Writing controllers/hello_controller-708796bd.js
+Writing controllers/index-ee64e1f1.js
+Writing controllers/application-3affb389.js
+Writing stimulus.min-4b1e420e.js
+Writing stimulus-d59b3b7f.js
+Writing stimulus.min-2395e199.js.map
+Writing stimulus-importmap-autoloader-64cc03e1.js
+Writing stimulus-autoloader-9d447422.js
+Writing stimulus-loading-1fc53fe7.js
+Writing turbo.min-5eb167c2.js.map
+Writing turbo-736fb387.js
+Writing turbo.min-9fd88cd5.js
+Writing actiontext.esm-f1c04d34.js
+Writing actiontext-a4ee937e.js
+Writing trix-4b540cb5.js
+Writing trix-65afdb1d.css
+Writing action_cable-5212cfee.js
+Writing actioncable.esm-e0ec9819.js
+Writing actioncable-ac25813f.js
+Writing activestorage.esm-f2909226.js
+Writing activestorage-32201f68.js
+Writing rails-ujs.esm-e925103b.js
+Writing rails-ujs-20eaf715.js
