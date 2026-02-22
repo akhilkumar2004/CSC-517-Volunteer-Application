@@ -1,0 +1,12 @@
+<div class="card">
+  <h2>Edit Admin Profile</h2>
+  <%= form_with model: @admin, url: admin_profile_path, method: :patch, local: true do |form| %>
+    <label>Name</label>
+    <%= form.text_field :name, required: true %>
+
+    <label>Email</label>
+    <%= form.email_field :email, required: true %>
+
+    <%= form.submit "Save Changes" %>
+  <% end %>
+</div>

@@ -1,0 +1,27 @@
+<%= form_with model: [:admin, @event], local: true do |form| %>
+  <label>Title</label>
+  <%= form.text_field :title, required: true %>
+
+  <label>Description</label>
+  <%= form.text_area :description, rows: 4, required: true %>
+
+  <label>Location</label>
+  <%= form.text_field :location, required: true %>
+
+  <label>Event Date</label>
+  <%= form.date_field :event_date, required: true %>
+
+  <label>Start Time</label>
+  <%= form.time_field :start_time, required: true %>
+
+  <label>End Time</label>
+  <%= form.time_field :end_time, required: true %>
+
+  <label>Required Volunteers</label>
+  <%= form.number_field :required_volunteers, min: 1, required: true %>
+
+  <label>Status</label>
+  <%= form.select :status, Event.statuses.keys %>
+
+  <%= form.submit %>
+<% end %>

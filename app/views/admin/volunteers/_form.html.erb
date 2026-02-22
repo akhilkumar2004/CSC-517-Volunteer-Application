@@ -1,0 +1,27 @@
+<%= form_with model: [:admin, @volunteer], local: true do |form| %>
+  <label>Username</label>
+  <%= form.text_field :username, required: true %>
+
+  <label>Password</label>
+  <%= form.password_field :password %>
+
+  <label>Confirm Password</label>
+  <%= form.password_field :password_confirmation %>
+
+  <label>Full Name</label>
+  <%= form.text_field :full_name, required: true %>
+
+  <label>Email</label>
+  <%= form.email_field :email, required: true %>
+
+  <label>Phone Number</label>
+  <%= form.text_field :phone_number %>
+
+  <label>Address</label>
+  <%= form.text_field :address %>
+
+  <label>Skills / Interests</label>
+  <%= form.text_area :skills, rows: 3 %>
+
+  <%= form.submit %>
+<% end %>

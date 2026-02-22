@@ -1,0 +1,12 @@
+<div class="card">
+  <h2>Event Details</h2>
+  <p><strong>Title:</strong> <%= @event.title %></p>
+  <p><strong>Description:</strong> <%= @event.description %></p>
+  <p><strong>Date:</strong> <%= @event.event_date %></p>
+  <p><strong>Time:</strong> <%= @event.start_time.strftime("%I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p") %></p>
+  <p><strong>Location:</strong> <%= @event.location %></p>
+  <p><strong>Status:</strong> <%= @event.status %></p>
+  <p><strong>Assigned:</strong> <%= @event.assigned_count %> / <%= @event.required_volunteers %></p>
+
+  <%= link_to "Edit", edit_admin_event_path(@event), class: "button-link" %>
+</div>

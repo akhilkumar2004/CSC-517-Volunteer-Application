@@ -1,0 +1,18 @@
+<%= form_with model: [:admin, @assignment], local: true do |form| %>
+  <label>Volunteer</label>
+  <%= form.select :volunteer_id, options_for_select(@volunteers.map { |volunteer| [volunteer.full_name, volunteer.id] }, @assignment.volunteer_id), include_blank: "Select" %>
+
+  <label>Event</label>
+  <%= form.select :event_id, options_for_select(@events.map { |event| [event.title, event.id] }, @assignment.event_id), include_blank: "Select" %>
+
+  <label>Status</label>
+  <%= form.select :status, VolunteerAssignment.statuses.keys %>
+
+  <label>Hours Worked</label>
+  <%= form.number_field :hours_worked, step: 0.25 %>
+
+  <label>Date Logged</label>
+  <%= form.date_field :date_logged %>
+
+  <%= form.submit %>
+<% end %>

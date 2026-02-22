@@ -1,0 +1,31 @@
+<div class="card">
+  <h2>Volunteer Assignments</h2>
+  <%= link_to "New Assignment", new_admin_volunteer_assignment_path, class: "button-link" %>
+  <table>
+    <thead>
+      <tr>
+        <th>Volunteer</th>
+        <th>Event</th>
+        <th>Status</th>
+        <th>Hours</th>
+        <th>Date Logged</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.volunteer.full_name %></td>
+          <td><%= assignment.event.title %></td>
+          <td><%= assignment.status %></td>
+          <td><%= assignment.hours_worked || "-" %></td>
+          <td><%= assignment.date_logged || "-" %></td>
+          <td>
+            <%= link_to "Edit", edit_admin_volunteer_assignment_path(assignment) %>
+            <%= button_to "Delete", admin_volunteer_assignment_path(assignment), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "link-button" %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

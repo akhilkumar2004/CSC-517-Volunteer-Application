@@ -1,0 +1,35 @@
+<div class="card">
+  <h2>Available Events</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Date</th>
+        <th>Location</th>
+        <th>Required Volunteers</th>
+        <th>Current Assigned</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @events.each do |event| %>
+        <tr>
+          <td><%= link_to event.title, event_path(event) %></td>
+          <td><%= event.event_date %></td>
+          <td><%= event.location %></td>
+          <td><%= event.required_volunteers %></td>
+          <td><%= event.assigned_count %></td>
+          <td><%= event.status %></td>
+          <td>
+            <% if event.can_accept_volunteers? %>
+              <%= button_to "Sign Up", event_signups_path(event_id: event.id), method: :post, class: "button-link" %>
+            <% else %>
+              <span>Not accepting</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

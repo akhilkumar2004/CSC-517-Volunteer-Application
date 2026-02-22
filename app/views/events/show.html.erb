@@ -1,0 +1,14 @@
+<div class="card">
+  <h2><%= @event.title %></h2>
+  <p><strong>Description:</strong> <%= @event.description %></p>
+  <p><strong>Date:</strong> <%= @event.event_date %></p>
+  <p><strong>Time:</strong> <%= @event.start_time.strftime("%I:%M %p") %> - <%= @event.end_time.strftime("%I:%M %p") %></p>
+  <p><strong>Location:</strong> <%= @event.location %></p>
+  <p><strong>Required Volunteers:</strong> <%= @event.required_volunteers %></p>
+  <p><strong>Current Assigned:</strong> <%= @event.assigned_count %></p>
+  <p><strong>Status:</strong> <%= @event.status %></p>
+
+  <% if @event.can_accept_volunteers? %>
+    <%= button_to "Sign Up", event_signups_path(event_id: @event.id), method: :post, class: "button-link" %>
+  <% end %>
+</div>

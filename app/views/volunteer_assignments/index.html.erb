@@ -1,0 +1,31 @@
+<div class="card">
+  <h2>Your Assignments</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Status</th>
+        <th>Hours</th>
+        <th>Date Logged</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.event.title %></td>
+          <td><%= assignment.status %></td>
+          <td><%= assignment.hours_worked || "-" %></td>
+          <td><%= assignment.date_logged || "-" %></td>
+          <td>
+            <% if %w[pending approved].include?(assignment.status) %>
+              <%= button_to "Withdraw", volunteer_assignment_path(assignment), method: :delete, class: "button-link button-secondary" %>
+            <% else %>
+              <span>-</span>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

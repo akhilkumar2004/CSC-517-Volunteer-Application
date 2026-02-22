@@ -1,0 +1,13 @@
+<div class="card">
+  <h2>Volunteer Details</h2>
+  <p><strong>Name:</strong> <%= @volunteer.full_name %></p>
+  <p><strong>Email:</strong> <%= @volunteer.email %></p>
+  <p><strong>Username:</strong> <%= @volunteer.username %></p>
+  <p><strong>Phone:</strong> <%= @volunteer.phone_number.presence || "-" %></p>
+  <p><strong>Address:</strong> <%= @volunteer.address.presence || "-" %></p>
+  <p><strong>Skills:</strong> <%= @volunteer.skills.presence || "-" %></p>
+  <p><strong>Total Hours:</strong> <%= @volunteer.total_hours %></p>
+
+  <%= link_to "Edit", edit_admin_volunteer_path(@volunteer), class: "button-link" %>
+  <%= button_to "Delete", admin_volunteer_path(@volunteer), method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "button-link button-secondary" %>
+</div>

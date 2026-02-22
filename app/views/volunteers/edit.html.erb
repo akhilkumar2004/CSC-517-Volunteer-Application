@@ -1,0 +1,27 @@
+<div class="card">
+  <h2>Edit Volunteer Profile</h2>
+  <%= form_with model: @volunteer, url: volunteer_profile_path, method: :patch, local: true do |form| %>
+    <label>Full Name</label>
+    <%= form.text_field :full_name, required: true %>
+
+    <label>Email</label>
+    <%= form.email_field :email, required: true %>
+
+    <label>Phone Number</label>
+    <%= form.text_field :phone_number %>
+
+    <label>Address</label>
+    <%= form.text_field :address %>
+
+    <label>Skills / Interests</label>
+    <%= form.text_area :skills, rows: 3 %>
+
+    <label>New Password</label>
+    <%= form.password_field :password %>
+
+    <label>Confirm Password</label>
+    <%= form.password_field :password_confirmation %>
+
+    <%= form.submit "Save Changes" %>
+  <% end %>
+</div>

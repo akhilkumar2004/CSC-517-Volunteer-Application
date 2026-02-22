@@ -1,0 +1,17 @@
+<div class="card">
+  <h2>Admin Dashboard</h2>
+  <p><strong>Name:</strong> <%= @admin.name %></p>
+  <p><strong>Email:</strong> <%= @admin.email %></p>
+
+  <%= link_to "Edit Profile", admin_profile_edit_path, class: "button-link" %>
+</div>
+
+<div class="card">
+  <h3>Quick Links</h3>
+  <ul>
+    <li><%= link_to "Manage Volunteers", admin_volunteers_path %></li>
+    <li><%= link_to "Manage Events", admin_events_path %></li>
+    <li><%= link_to "Manage Assignments", admin_volunteer_assignments_path %></li>
+    <li><%= link_to "View Analytics", admin_analytics_path %></li>
+  </ul>
+</div>

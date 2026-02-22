@@ -1,0 +1,89 @@
+Started GET "/" for ::1 at 2026-02-22 15:07:33 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='CscEceSpring2026Program2'*/[0m
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 0.5ms | GC: 0.0ms)
+  [1m[36mVolunteer Load (0.3ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" WHERE "volunteers"."id" IS NULL LIMIT 1 /*action='index',application='CscEceSpring2026Program2',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#current_volunteer'
+  [1m[36mAdmin Load (2.6ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" IS NULL LIMIT 1 /*action='index',application='CscEceSpring2026Program2',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:18:in 'ApplicationController#current_admin'
+  Rendered layout layouts/application.html.erb (Duration: 125.4ms | GC: 27.5ms)
+Completed 200 OK in 216ms (Views: 129.5ms | ActiveRecord: 4.7ms (2 queries, 0 cached) | GC: 29.7ms)
+
+
+Started GET "/admin/login" for ::1 at 2026-02-22 15:07:36 -0500
+Processing by AdminSessionsController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering admin_sessions/new.html.erb within layouts/application
+  Rendered admin_sessions/new.html.erb within layouts/application (Duration: 3.4ms | GC: 0.0ms)
+  [1m[36mVolunteer Load (0.3ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" WHERE "volunteers"."id" IS NULL LIMIT 1 /*action='new',application='CscEceSpring2026Program2',controller='admin_sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#current_volunteer'
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" IS NULL LIMIT 1 /*action='new',application='CscEceSpring2026Program2',controller='admin_sessions'*/[0m
+  ↳ app/controllers/application_controller.rb:18:in 'ApplicationController#current_admin'
+  Rendered layout layouts/application.html.erb (Duration: 18.5ms | GC: 0.0ms)
+Completed 200 OK in 50ms (Views: 19.1ms | ActiveRecord: 0.3ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/admin/login" for ::1 at 2026-02-22 15:07:40 -0500
+Processing by AdminSessionsController#create as TURBO_STREAM
+  Parameters: {"authenticity_token" => "[FILTERED]", "username" => "admin", "password" => "[FILTERED]", "commit" => "Log in"}
+  [1m[36mAdmin Load (0.7ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."username" = 'admin' LIMIT 1 /*action='create',application='CscEceSpring2026Program2',controller='admin_sessions'*/[0m
+  ↳ app/controllers/admin_sessions_controller.rb:6:in 'AdminSessionsController#create'
+Redirected to http://localhost:3000/admin/dashboard
+Completed 302 Found in 295ms (ActiveRecord: 2.0ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/admin/dashboard" for ::1 at 2026-02-22 15:07:40 -0500
+Processing by AdminsController#show as TURBO_STREAM
+  [1m[36mAdmin Load (0.2ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = 1 LIMIT 1 /*action='show',application='CscEceSpring2026Program2',controller='admins'*/[0m
+  ↳ app/controllers/application_controller.rb:18:in 'ApplicationController#current_admin'
+  Rendering layout layouts/application.html.erb
+  Rendering admins/show.html.erb within layouts/application
+  Rendered admins/show.html.erb within layouts/application (Duration: 2.4ms | GC: 0.0ms)
+  [1m[36mVolunteer Load (0.1ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" WHERE "volunteers"."id" IS NULL LIMIT 1 /*action='show',application='CscEceSpring2026Program2',controller='admins'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#current_volunteer'
+  Rendered layout layouts/application.html.erb (Duration: 6.7ms | GC: 0.0ms)
+Completed 200 OK in 43ms (Views: 7.5ms | ActiveRecord: 0.1ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/admin/analytics" for ::1 at 2026-02-22 15:07:41 -0500
+Processing by Admin::AnalyticsController#index as HTML
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = 1 LIMIT 1 /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/controllers/application_controller.rb:18:in 'ApplicationController#current_admin'
+  [1m[36mVolunteerAssignment Load (0.2ms)[0m  [1m[34mSELECT "volunteer_assignments".* FROM "volunteer_assignments" WHERE "volunteer_assignments"."status" = 'completed' /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/controllers/admin/analytics_controller.rb:28:in 'Enumerable#group_by'
+  [1m[36mVolunteer Load (0.4ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" WHERE "volunteers"."id" = 1 /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/controllers/admin/analytics_controller.rb:28:in 'Enumerable#group_by'
+  [1m[36mEvent Load (0.1ms)[0m  [1m[34mSELECT "events".* FROM "events" WHERE "events"."id" IN (1, 2) /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/controllers/admin/analytics_controller.rb:28:in 'Enumerable#group_by'
+  Rendering layout layouts/application.html.erb
+  Rendering admin/analytics/index.html.erb within layouts/application
+  [1m[36mEvent Load (0.3ms)[0m  [1m[34mSELECT "events".* FROM "events" ORDER BY "events"."event_date" ASC /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/views/admin/analytics/index.html.erb:11:in 'Enumerable#map'
+  [1m[36mVolunteer Load (0.0ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" ORDER BY "volunteers"."full_name" ASC /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/views/admin/analytics/index.html.erb:14:in 'Enumerable#map'
+  [1m[36mVolunteer Exists? (0.0ms)[0m  [1m[34mSELECT 1 AS one FROM "volunteers" WHERE "volunteers"."id" != 1 LIMIT 1 /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/views/admin/analytics/index.html.erb:98
+  [1m[36mVolunteer Load (0.0ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" WHERE "volunteers"."id" != 1 ORDER BY "volunteers"."full_name" ASC /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/views/admin/analytics/index.html.erb:100
+  Rendered admin/analytics/index.html.erb within layouts/application (Duration: 22.0ms | GC: 0.0ms)
+  [1m[36mVolunteer Load (0.0ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" WHERE "volunteers"."id" IS NULL LIMIT 1 /*action='index',application='CscEceSpring2026Program2',controller='analytics'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#current_volunteer'
+  Rendered layout layouts/application.html.erb (Duration: 29.3ms | GC: 0.0ms)
+Completed 200 OK in 144ms (Views: 29.6ms | ActiveRecord: 2.1ms (9 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for ::1 at 2026-02-22 15:07:47 -0500
+Processing by HomeController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering home/index.html.erb within layouts/application
+  Rendered home/index.html.erb within layouts/application (Duration: 4.8ms | GC: 0.0ms)
+  [1m[36mVolunteer Load (0.6ms)[0m  [1m[34mSELECT "volunteers".* FROM "volunteers" WHERE "volunteers"."id" IS NULL LIMIT 1 /*action='index',application='CscEceSpring2026Program2',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:12:in 'ApplicationController#current_volunteer'
+  [1m[36mAdmin Load (0.1ms)[0m  [1m[34mSELECT "admins".* FROM "admins" WHERE "admins"."id" = 1 LIMIT 1 /*action='index',application='CscEceSpring2026Program2',controller='home'*/[0m
+  ↳ app/controllers/application_controller.rb:18:in 'ApplicationController#current_admin'
+  Rendered layout layouts/application.html.erb (Duration: 20.4ms | GC: 0.0ms)
+Completed 200 OK in 58ms (Views: 23.4ms | ActiveRecord: 0.7ms (2 queries, 0 cached) | GC: 0.0ms)
+
+

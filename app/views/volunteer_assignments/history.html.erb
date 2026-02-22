@@ -1,0 +1,22 @@
+<div class="card">
+  <h2>Volunteer History</h2>
+  <p><strong>Total Hours:</strong> <%= @total_hours %></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Event</th>
+        <th>Date Logged</th>
+        <th>Hours</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @assignments.each do |assignment| %>
+        <tr>
+          <td><%= assignment.event.title %></td>
+          <td><%= assignment.date_logged %></td>
+          <td><%= assignment.hours_worked %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
