@@ -1,16 +1,16 @@
 class AdminsController < ApplicationController
-  before_action :require_admin
+  before_action :require_login
 
   def show
-    @admin = current_admin
+    @admin = current_user
   end
 
   def edit
-    @admin = current_admin
+    @admin = current_user
   end
 
   def update
-    @admin = current_admin
+    @admin = current_user
 
     if @admin.update(admin_params)
       redirect_to admin_dashboard_path, notice: "Profile updated."

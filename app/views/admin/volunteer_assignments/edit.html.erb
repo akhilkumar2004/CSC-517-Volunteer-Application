@@ -1,7 +1,17 @@
+<% if @assignment.errors.any? %>
+  <div class="flash-alert" style="margin-bottom: 15px;">
+    <ul>
+      <% @assignment.errors.full_messages.uniq.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
 <div class="card">
   <h2>Edit Assignment</h2>
-  <p><strong>Volunteer:</strong> <%= @assignment.volunteer.full_name %></p>
-  <p><strong>Event:</strong> <%= @assignment.event.title %></p>
+  <p><strong>Volunteer:</strong> <%= @assignment.volunteer&.full_name || '[Not selected]' %></p>
+  <p><strong>Event:</strong> <%= @assignment.event&.title || '[Not selected]' %></p>
 
   <%= render "form" %>
 </div>

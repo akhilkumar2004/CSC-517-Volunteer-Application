@@ -1,5 +1,5 @@
 class Admin::EventsController < ApplicationController
-    before_action :require_admin
+    before_action :require_login
     before_action :set_event, only: %i[show edit update destroy]
 
     def index
@@ -27,12 +27,13 @@ class Admin::EventsController < ApplicationController
     end
 
     def update
-      if @event.update(event_params)
+      if @event.update(event_params)  # Rails will run all validations, including your custom one
         redirect_to admin_event_path(@event), notice: "Event updated."
       else
         render :edit, status: :unprocessable_entity
       end
     end
+
 
     def destroy
       @event.destroy
@@ -49,4 +50,3 @@ class Admin::EventsController < ApplicationController
       params.require(:event).permit(:title, :description, :location, :event_date, :start_time, :end_time, :required_volunteers, :status)
     end
   end
-

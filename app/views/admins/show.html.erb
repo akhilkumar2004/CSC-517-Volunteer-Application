@@ -1,7 +1,8 @@
 <div class="card">
   <h2>Admin Dashboard</h2>
-  <p><strong>Name:</strong> <%= @admin.name %></p>
-  <p><strong>Email:</strong> <%= @admin.email %></p>
+  <p><strong>ID:</strong> <%= 1 %></p>
+  <p><strong>Name:</strong> <%= current_admin.name %></p>
+  <p><strong>Email:</strong> <%= current_admin.email %></p>
 
   <%= link_to "Edit Profile", admin_profile_edit_path, class: "button-link" %>
 </div>

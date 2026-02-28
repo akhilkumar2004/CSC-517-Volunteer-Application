@@ -1,5 +1,5 @@
 class Admin::AnalyticsController < ApplicationController
-    before_action :require_admin
+    before_action :require_login
 
     def index
       @events = Event.order(event_date: :asc)

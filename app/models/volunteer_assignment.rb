@@ -10,18 +10,26 @@ class VolunteerAssignment < ApplicationRecord
     rejected: "rejected"
   }, default: :pending
 
+
+  # Validations
   validates :status, presence: true
-  validates :hours_worked, numericality: { greater_than_or_equal_to: 0 }, allow_nil: true
+  validates :hours_worked,
+            numericality: { greater_than_or_equal_to: 0 },
+            allow_nil: true
+
   validate :completed_requires_completed_event
   validate :hours_within_event_duration
   validate :hours_require_completed_event
   validate :completed_requires_hours_and_date
   validate :event_capacity_available
+  validate :lock_hours_after_completion, on: :update
 
   after_save :refresh_event_status
   after_destroy :refresh_event_status
 
   private
+
+  # Custom validations
 
   def completed_requires_completed_event
     return unless status == "completed"
@@ -53,12 +61,24 @@ class VolunteerAssignment < ApplicationRecord
     return unless %w[approved completed].include?(status)
     return if event.blank?
 
-    current_count = event.volunteer_assignments.where(status: %w[approved completed]).where.not(id: id).count
+    current_count = event.volunteer_assignments
+                         .where(status: %w[approved completed])
+                         .where.not(id: id)
+                         .count
     if current_count >= event.required_volunteers
       errors.add(:status, "cannot be approved because the event is full")
     end
   end
 
+  # Prevent editing hours after completion
+  def lock_hours_after_completion
+    return unless completed?               # Only if assignment is completed
+    return unless will_save_change_to_hours_worked? # Only if hours are being changed
+
+    errors.add(:hours_worked, "cannot be changed after the assignment is completed")
+  end
+
+  # Refresh the event status after changes
   def refresh_event_status
     event&.refresh_status!
   end

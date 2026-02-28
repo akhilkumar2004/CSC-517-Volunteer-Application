@@ -1,14 +1,21 @@
-class VolunteerSessionsController < ApplicationController
+class SessionsController < ApplicationController
   def new
   end
 
   def create
-    volunteer = Volunteer.find_by(username: params[:username])
+    user = Volunteer.find_by(username: params[:username]) ||
+           Admin.find_by(username: params[:username])
 
-    if volunteer&.authenticate(params[:password])
+    if user&.authenticate(params[:password])
       reset_session
-      session[:volunteer_id] = volunteer.id
-      redirect_to volunteer_dashboard_path, notice: "Welcome back, #{volunteer.full_name}."
+
+      if user.is_a?(Volunteer)
+        session[:volunteer_id] = user.id
+        redirect_to volunteer_dashboard_path, notice: "Welcome back, #{user.full_name}."
+      else
+        session[:admin_id] = user.id
+        redirect_to admin_dashboard_path, notice: "Welcome back, Admin."
+      end
     else
       flash.now[:alert] = "Invalid username or password."
       render :new, status: :unprocessable_entity

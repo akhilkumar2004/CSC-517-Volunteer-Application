@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
-  root "home#index"
+  root "sessions#new"
+
 
   get "volunteer/signup", to: "volunteers#new"
   post "volunteer/signup", to: "volunteers#create"
@@ -10,13 +11,11 @@ Rails.application.routes.draw do
   patch "volunteer/profile", to: "volunteers#update"
   delete "volunteer/account", to: "volunteers#destroy"
 
-  get "volunteer/login", to: "volunteer_sessions#new"
-  post "volunteer/login", to: "volunteer_sessions#create"
-  delete "volunteer/logout", to: "volunteer_sessions#destroy"
+  # unified login/logout for both volunteers and admins
+  get "login", to: "sessions#new", as: :login
+  post "login", to: "sessions#create"
+  delete "logout", to: "sessions#destroy", as: :logout
 
-  get "admin/login", to: "admin_sessions#new"
-  post "admin/login", to: "admin_sessions#create"
-  delete "admin/logout", to: "admin_sessions#destroy"
 
   get "admin/dashboard", to: "admins#show"
   get "admin/profile/edit", to: "admins#edit"
@@ -31,7 +30,11 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :volunteers
     resources :events
-    resources :volunteer_assignments, only: %i[index new create edit update destroy]
+    resources :volunteer_assignments, only: %i[index new create edit update destroy] do
+      member do
+        post :approve
+      end
+    end
     get "analytics", to: "analytics#index"
   end
 end

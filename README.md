@@ -35,8 +35,13 @@
 
 ## Tests
 
+- Run `brew services start postgresql`
 - Run `bundle exec rspec`.
 
 ## LLM Conversation
 
-- The LLM conversation transcript should be included with the submission as required by the assignment.
+https://docs.google.com/document/d/1tYrmwC93ipwJpYaxxvKBLe7qmvBEZ1cOlCP55v5EDPU/edit?usp=sharing 
+
+Link to hosted website: https://csc-517-volunteer-application.onrender.com
+
+If the application gives you a Render loading screen, wait until the application loads. Unfortunately the application doesn't have always-on availability as we are using the free tier version of Render. 

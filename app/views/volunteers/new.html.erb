@@ -1,28 +1,40 @@
 <div class="card">
   <h2>Volunteer Sign Up</h2>
+  <%= link_to "Login", login_path %>
+
+  <% if @volunteer.errors.any? %>
+    <div class="flash-alert">
+      <ul>
+        <% @volunteer.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= form_with model: @volunteer, url: volunteer_signup_path, local: true do |form| %>
-    <label>Username</label>
+    <%= form.label :username do %>Username <span class="required">*</span><% end %>
     <%= form.text_field :username, required: true %>
 
-    <label>Password</label>
+    <%= form.label :password do %>Password <span class="required">*</span><% end %>
     <%= form.password_field :password, required: true %>
 
-    <label>Confirm Password</label>
+    <%= form.label :password_confirmation do %>Confirm Password <span class="required">*</span><% end %>
     <%= form.password_field :password_confirmation, required: true %>
 
-    <label>Full Name</label>
+    <%= form.label :full_name do %>Full Name <span class="required">*</span><% end %>
     <%= form.text_field :full_name, required: true %>
 
-    <label>Email</label>
+    <%= form.label :email do %>Email <span class="required">*</span><% end %>
     <%= form.email_field :email, required: true %>
 
-    <label>Phone Number</label>
+    <%= form.label :phone_number %>
     <%= form.text_field :phone_number %>
 
-    <label>Address</label>
+    <%= form.label :address %>
     <%= form.text_field :address %>
 
-    <label>Skills / Interests</label>
+    <%= form.label :skills %>
     <%= form.text_area :skills, rows: 3 %>
 
     <%= form.submit "Create Account" %>

@@ -1,5 +1,5 @@
 class Admin::VolunteersController < ApplicationController
-    before_action :require_admin
+    before_action :require_login
     before_action :set_volunteer, only: %i[show edit update destroy]
 
     def index

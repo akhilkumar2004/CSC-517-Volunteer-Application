@@ -9,7 +9,10 @@
   <%= form.select :status, VolunteerAssignment.statuses.keys %>
 
   <label>Hours Worked</label>
+  <% completed = @assignment.event&.completed? %>
   <%= form.number_field :hours_worked, step: 0.25 %>
+  <% if completed %>
+  <% end %>
 
   <label>Date Logged</label>
   <%= form.date_field :date_logged %>

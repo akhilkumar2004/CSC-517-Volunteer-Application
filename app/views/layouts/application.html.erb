@@ -26,32 +26,76 @@
     <header class="site-header">
       <h1 class="site-title">Volunteer Management System</h1>
       <nav class="site-nav">
-        <%= link_to "Home", root_path %>
-        <% if volunteer_signed_in? %>
-          <%= link_to "Dashboard", volunteer_dashboard_path %>
-          <%= link_to "Events", events_path %>
-          <%= link_to "Assignments", volunteer_assignments_path %>
-          <%= link_to "History", volunteer_history_path %>
-          <%= button_to "Logout", volunteer_logout_path, method: :delete, class: "link-button" %>
-        <% elsif admin_signed_in? %>
-          <%= link_to "Dashboard", admin_dashboard_path %>
-          <%= link_to "Volunteers", admin_volunteers_path %>
-          <%= link_to "Events", admin_events_path %>
-          <%= link_to "Assignments", admin_volunteer_assignments_path %>
-          <%= link_to "Analytics", admin_analytics_path %>
-          <%= button_to "Logout", admin_logout_path, method: :delete, class: "link-button" %>
+        <% if signed_in? %>
+          <% if current_user.is_a?(Admin) %>
+            <%= link_to "Dashboard", admin_dashboard_path %>
+            <%= link_to "Volunteers", admin_volunteers_path %>
+            <%= link_to "Events", admin_events_path %>
+            <%= link_to "Assignments", admin_volunteer_assignments_path %>
+            <%= link_to "Analytics", admin_analytics_path %>
+            <%= button_to "Logout", logout_path, method: :delete, class: "link-button" %>
+          <% else %>
+            <%= link_to "Dashboard", volunteer_dashboard_path %>
+            <%= link_to "Events", events_path %>
+            <%= link_to "Assignments", volunteer_assignments_path %>
+            <%= link_to "History", volunteer_history_path %>
+            <%= button_to "Logout", logout_path, method: :delete, class: "link-button" %>
+          <% end %>
         <% else %>
           <%= link_to "Volunteer Sign Up", volunteer_signup_path %>
-          <%= link_to "Volunteer Login", volunteer_login_path %>
-          <%= link_to "Admin Login", admin_login_path %>
+          <%= link_to "Login", login_path %>
         <% end %>
       </nav>
     </header>
 
     <main class="site-main">
-      <% flash.each do |type, message| %>
-        <div class="flash <%= type %>"><%= message %></div>
-      <% end %>
+      <div class="flash-messages">
+        <% flash.each do |type, message| %>
+          <% color_class = case type.to_sym
+             when :notice, :success then 'flash-notice'  # green for success
+             when :alert, :error   then 'flash-alert'   # red for errors
+             else 'flash-info'
+             end %>
+          <div class="<%= color_class %>">
+            <p><%= message %></p>
+          </div>
+        <% end %>
+      </div>
+
+      <style>
+      .flash-notice {
+        background-color: #d4edda; /* light green */
+        color: #155724;
+        border: 1px solid #c3e6cb;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+
+      .flash-alert {
+        background-color: #f8d7da; /* light red */
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+
+      .flash-info {
+        background-color: #d1ecf1; /* optional info color */
+        color: #0c5460;
+        border: 1px solid #bee5eb;
+        padding: 10px;
+        margin-bottom: 10px;
+        border-radius: 5px;
+        font-weight: 500;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      }
+      </style>
 
       <%= yield %>
     </main>

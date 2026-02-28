@@ -1,4 +1,16 @@
 <div class="card">
   <h2>Edit Event</h2>
+
+  <% if @event.errors.any? %>
+    <div class="errors text-red-600">
+      <h3><%= pluralize(@event.errors.count, "error") %> prevented this event from being saved:</h3>
+      <ul>
+        <% @event.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= render "form" %>
 </div>

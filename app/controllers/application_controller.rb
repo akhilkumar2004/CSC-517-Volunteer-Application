@@ -1,21 +1,28 @@
 class ApplicationController < ActionController::Base
-  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
-  allow_browser versions: :modern
+  # Use before_action here to make it available to all controllers
+  before_action :require_login
 
-  helper_method :current_volunteer, :current_admin, :volunteer_signed_in?, :admin_signed_in?
+  helper_method :current_volunteer, :current_admin, :current_user, 
+                :volunteer_signed_in?, :admin_signed_in?, :signed_in?
 
   private
 
-  def current_volunteer
-    return @current_volunteer if defined?(@current_volunteer)
+  def require_login
+    unless signed_in?
+      redirect_to root_path, alert: "Please log in first."
+    end
+  end
 
-    @current_volunteer = Volunteer.find_by(id: session[:volunteer_id])
+  def current_volunteer
+    @current_volunteer ||= Volunteer.find_by(id: session[:volunteer_id])
   end
 
   def current_admin
-    return @current_admin if defined?(@current_admin)
+    @current_admin ||= Admin.find_by(id: session[:admin_id])
+  end
 
-    @current_admin = Admin.find_by(id: session[:admin_id])
+  def current_user
+    current_admin || current_volunteer
   end
 
   def volunteer_signed_in?
@@ -26,15 +33,7 @@ class ApplicationController < ActionController::Base
     current_admin.present?
   end
 
-  def require_volunteer
-    return if volunteer_signed_in?
-
-    redirect_to volunteer_login_path, alert: "Please log in as a volunteer."
-  end
-
-  def require_admin
-    return if admin_signed_in?
-
-    redirect_to admin_login_path, alert: "Please log in as an admin."
+  def signed_in?
+    current_user.present?
   end
 end
