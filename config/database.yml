@@ -26,3 +26,7 @@ cable:
 
 queue:
   <<: *production
+
+cache:
+  <<: *production
+  database: <%= ENV["CACHE_DATABASE_URL"] || ENV["DATABASE_URL"] %>
