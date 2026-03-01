@@ -22,7 +22,6 @@ class VolunteerAssignment < ApplicationRecord
   validate :hours_require_completed_event
   validate :completed_requires_hours_and_date
   validate :event_capacity_available
-  validate :lock_hours_after_completion, on: :update
 
   after_save :refresh_event_status
   after_destroy :refresh_event_status
@@ -70,13 +69,7 @@ class VolunteerAssignment < ApplicationRecord
     end
   end
 
-  # Prevent editing hours after completion
-  def lock_hours_after_completion
-    return unless completed?               # Only if assignment is completed
-    return unless will_save_change_to_hours_worked? # Only if hours are being changed
-
-    errors.add(:hours_worked, "cannot be changed after the assignment is completed")
-  end
+  
 
   # Refresh the event status after changes
   def refresh_event_status
