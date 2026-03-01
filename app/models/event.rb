@@ -11,6 +11,7 @@ class Event < ApplicationRecord
 
   validate :start_before_end
   validate :required_volunteers_cannot_change_if_completed, on: :update
+  validate :start_time_before_end_time
 
   # Count approved/completed volunteers
   def assigned_count
@@ -53,6 +54,15 @@ class Event < ApplicationRecord
     return unless will_save_change_to_required_volunteers?
 
     errors.add(:required_volunteers, "cannot be changed after the event is completed")
+  end
+  private
+
+  def start_time_before_end_time
+    return if start_time.blank? || end_time.blank?
+
+    if start_time > end_time
+      errors.add(:start_time, "cannot be later than the end time")
+    end
   end
 
 end
