@@ -17,16 +17,6 @@ test:
   password:
   host: localhost
 
-production: &production
+production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
-
-cable:
-  <<: *production
-
-queue:
-  <<: *production
-
-cache:
-  <<: *production
-  database: <%= ENV["CACHE_DATABASE_URL"] || ENV["DATABASE_URL"] %>

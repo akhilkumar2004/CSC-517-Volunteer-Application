@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_02_28_160009) do
+ActiveRecord::Schema[8.0].define(version: 2026_03_01_012921) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,8 +61,10 @@ ActiveRecord::Schema[8.0].define(version: 2026_02_28_160009) do
     t.text "skills"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "volunteer_number"
     t.index ["email"], name: "index_volunteers_on_email", unique: true
     t.index ["username"], name: "index_volunteers_on_username", unique: true
+    t.index ["volunteer_number"], name: "index_volunteers_on_volunteer_number", unique: true
   end
 
   add_foreign_key "volunteer_assignments", "events"
