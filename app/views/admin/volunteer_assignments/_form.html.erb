@@ -1,37 +1,24 @@
-<% if @event.errors.any? %>
-  <div class="flash-alert" style="margin-bottom: 15px;">
-    <ul>
-      <% @event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-    </ul>
-  </div>
-<% end %>
+<%= form_with model: [:admin, @assignment], local: true do |form| %>
+  <label>Volunteer</label>
+  <%= form.select :volunteer_id,
+        options_for_select(@volunteers.map { |v| [v.full_name, v.id] },
+        @assignment.volunteer_id),
+        include_blank: "Select" %>
 
-<%= form_with model: [:admin, @event], local: true do |form| %>
-  <label>Title</label>
-  <%= form.text_field :title, required: true %>
-
-  <label>Description</label>
-  <%= form.text_area :description, rows: 4, required: true %>
-
-  <label>Location</label>
-  <%= form.text_field :location, required: true %>
-
-  <label>Event Date</label>
-  <%= form.date_field :event_date, required: true %>
-
-  <label>Start Time</label>
-  <%= form.time_field :start_time, required: true %>
-
-  <label>End Time</label>
-  <%= form.time_field :end_time, required: true %>
-
-  <label>Required Volunteers</label>
-  <%= form.number_field :required_volunteers, min: 1, required: true %>
+  <label>Event</label>
+  <%= form.select :event_id,
+        options_for_select(@events.map { |e| [e.title, e.id] },
+        @assignment.event_id),
+        include_blank: "Select" %>
 
   <label>Status</label>
-  <%= form.select :status, Event.statuses.keys %>
+  <%= form.select :status, VolunteerAssignment.statuses.keys %>
+
+  <label>Hours Worked</label>
+  <%= form.number_field :hours_worked, step: 0.25 %>
+
+  <label>Date Logged</label>
+  <%= form.date_field :date_logged %>
 
   <%= form.submit %>
 <% end %>

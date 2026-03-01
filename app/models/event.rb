@@ -55,6 +55,7 @@ class Event < ApplicationRecord
 
     errors.add(:required_volunteers, "cannot be changed after the event is completed")
   end
+
   private
 
   def start_time_before_end_time
@@ -64,5 +65,6 @@ class Event < ApplicationRecord
       errors.add(:start_time, "cannot be later than the end time")
     end
   end
+
 
 end

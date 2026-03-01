@@ -70,7 +70,6 @@ class VolunteerAssignment < ApplicationRecord
   end
 
   
-
   # Refresh the event status after changes
   def refresh_event_status
     event&.refresh_status!
